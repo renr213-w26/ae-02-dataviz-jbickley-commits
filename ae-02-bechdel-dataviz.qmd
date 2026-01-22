@@ -287,9 +287,10 @@ What other improvements could we make to this plot?
 
 ggplot(bechdel, aes(x = budget_2013/1000000, y = gross_2013/1000000, size= roi, alpha =0.8)) +
   geom_point(color = "firebrick") + 
-  scale_x_continuous(breaks = pretty_breaks(6), expand = c(0,100)) +
+  scale_x_continuous(breaks = pretty_breaks(2), expand = c(0,100)) +
   scale_y_continuous(breaks = pretty_breaks(6))+
   facet_grid(binary ~ clean_test) +
+  theme_bw()
   labs(
     x = "Budget (in 2013 Million$)", 
     y = "Gross revenue (in 2013 Million$)", 
@@ -340,13 +341,13 @@ bechdel |>
 
 ### Step 2 - Demo
 
-Expand on your plot from the previous step to zoom in on movies with `roi < ___` to get a better view of how the medians across the categories compare.
+Expand on your plot from the previous step to zoom in on movies with `roi < 50` to get a better view of how the medians across the categories compare.
 
 ```{r}
 #| label: roi-test-zoom
 
 bechdel |>
-  filter(roi < 18) |>
+  filter(roi < 50) |>
   ggplot(aes(x = clean_test, y = roi, colour = binary,)) +
   geom_boxplot() + 
   labs(
@@ -358,6 +359,9 @@ bechdel |>
 ```
 
 What does this plot say about return-on-investment on movies that pass the Bechdel test?
+
+The return on investment on movies that pass the Bechdel test, is in similar ranges as others, and we can see that movies that do pass do not do worse than movies that do not.
+The Median ROI is slightly higher then movies that do not.
 
 ### Render, commit, and push
 
